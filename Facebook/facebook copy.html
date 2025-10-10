@@ -19,6 +19,25 @@
         padding: 0;
       }
 
+      .tooltip{
+        bottom: -40px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        position: absolute;
+        font-size: 13px;
+        color: white;
+        background-color: rgba(0,0,0,0.75);
+        border-radius: 12px;
+        box-shadow: 0 0 4px rgba(0,0,0,0.6);
+        padding: 6px 12px 8px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      .tabs:hover .tooltip, .options:hover .tooltip{
+        transition: opacity 0.3s ease 0.3s;
+      } 
+
       /* ===========================
          HEADER & LAYOUT
       ============================ */
@@ -53,7 +72,7 @@
       }
 
       /* ===========================
-         LOGO & SEARCH
+         LOGO & SEARCH - LEFT SECTION
       ============================ */
 
       .facebook-logo{
@@ -88,14 +107,14 @@
       }
 
       /* ===========================
-         NAVIGATION OPTIONS
+         NAVIGATION OPTIONS - MIDDLE SECTION
       ============================ */
-      .options-container{
+      .tabs-container{
         margin-left: 8px;
         border-top: inset 2px solid black; /*To prevent the options from being too close to the top*/
       }
 
-      .options{
+      .tabs{
         display: flex;
         flex-direction: column;
         width: 76.39px;
@@ -106,13 +125,13 @@
         position: relative;
       }
 
-      .nav-icon{ /*The placeholder for the icons*/
+      .tab-icon{ /*The placeholder for the tab icons*/
         z-index: 2;
         height: 24px;
         width: 24px;
         background-color: rgb(138, 138, 138);
       }
-      .underline{ /*The blue underline that appears when the option is active*/
+      .underline{ /*The blue underline that appears when a tab is active*/
         position: absolute;
         height: 3px;
         width: 72px;
@@ -120,11 +139,11 @@
         background-color: rgb(37, 105, 231);
       }
 
-      .home{
+      .home{ /*The blue home icon that appears when the home tab is active*/
         background-color: rgb(37, 105, 231);
       }
 
-      .nav-hover-bg{ /*The shadow background that appears when the option is hovered over*/
+      .tab-hover-bg{ /*The shadow background that appears when the tab is hovered over*/
         opacity: 0;
         z-index: 1;
         position: absolute;
@@ -134,38 +153,21 @@
         background-color: rgba(235, 235, 235);
       }
       
-      .options:hover .tooltip, .options-2:hover .tooltip{
-        transition: opacity 0.3s ease 0.3s;
-      } 
-      .options:hover .nav-hover-bg, .options:hover .tooltip, .options-2:hover .tooltip{
+      .tabs:hover .tab-hover-bg, .tabs:hover .tooltip, .options:hover .tooltip{ /*When the tab is hovered over, the shadow background and tooltip appears*/
         opacity: 1;
       } 
-      .tooltip{
-        bottom: -40px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        position: absolute;
-        font-size: 13px;
-        color: white;
-        background-color: rgba(0,0,0,0.75);
-        border-radius: 12px;
-        box-shadow: 0 0 4px rgba(0,0,0,0.6);
-        padding: 6px 12px 8px;
-        opacity: 0;
-        pointer-events: none;
-        z-index: 3;
-      }
 
       /* ===========================
          RIGHT SECTION ICONS
       ============================ */
-      .options-2-container{
+      .options-container{
         display: flex;
         height: 56px;
         width: 40px;
         align-items: center;
         justify-content: center;
       }
-      .options-2{
+      .options{
         background-color: rgb(223, 223, 223);
         border-radius: 20px;
         width: 40px;
@@ -190,6 +192,7 @@
       .notifications, .messenger, .menu{
         margin-right: 8px;
       }
+
       .dropdown{
         font-family: Arial;
         font-size: 12px;
@@ -221,23 +224,23 @@
         position: absolute;
         background-color: rgba(0, 0, 0, 0.1);
       }
-      .options-2:active .user-profile, .options-2:active .overlay, .options-2:active{
+      .options:active .user-profile, .options:active .overlay, .options:active{
         width: 39px;
         height: 39px;
         opacity: 1;
       }
-      .options-2:active .notif{ /*Shifts the thing*/
+      .options:active .notif{ /*Shifts the thing*/
         top: -7px;
         right: -5px;
       }
-      .options-2:active .dropdown{ /*Makes the dropdown shrink when the option is clicked*/ 
+      .options:active .dropdown{ /*Makes the dropdown shrink when the option is clicked*/ 
         width: 10px;
         height: 10px;
         bottom: 0;
         right: 0;
         background-color: rgb(209, 209, 209);
       }
-      .options-2:active .action-icon{ /*Makes the option shrink when clicked*/ 
+      .options:active .action-icon{ /*Makes the option shrink when clicked*/ 
         width: 19px;
         height: 19px;
       }
@@ -245,7 +248,7 @@
       /* ===========================
          DROPDOWN PANELS
       ============================ */
-      .expand{
+      .options-expansion{
         z-index: 2;
         opacity: 0;
         position: absolute;
@@ -265,6 +268,7 @@
         height: 668.97px;
         bottom: -674px;
         left: -276px;
+        opacity: 1; /*so that it doesnt disappear*/
       }
       .menu-details{
         width: 559.38px;
@@ -278,7 +282,8 @@
         display: flex;
         flex-direction: column;
       }
-      .options-2:focus .expand{
+
+      .options:focus .options-expansion{
         opacity: 1;
         transition: opacity 0.3s;
       }
@@ -384,11 +389,12 @@
       /* ===========================
          NOTIFICATIONS DROPDOWN
       ============================ */
-      .header{
+      .head{
         display: flex;
         flex-direction: column;
       }
-      .first-row{
+
+      .row-1{
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -403,7 +409,7 @@
         font-weight: bold;
         color: grey;
       }
-      .second-row{
+      .row-2{
         display: flex;
         align-items: center;
         padding: 0 15px;
@@ -422,6 +428,37 @@
         font-size: 15px;
       }
 
+      /*Body*/
+
+      .title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        font-size: 15px;
+      }
+
+      .sub-title{
+        font-size: 17px;
+        font-weight: 550;
+      }
+
+      .see-all-container{
+        cursor: pointer;
+        background-color: orange;
+        padding: 4px 8px;
+        border-radius: 2px;
+      }
+
+      .see-all-container:active{
+        background-color: black;
+      }
+
+      .see-all{
+        color: rgb(0, 110, 255);
+        font-size: 15px;
+      }
+
       /* ===========================
          MISCELLANEOUS
       ============================ */
@@ -435,9 +472,49 @@
         color: grey;
         font-size: 13px;
       }
-      .bold{
-        font-weight: 550;
+
+      .alert-container{
+        display: flex;
+        vertical-align: top;
+        gap: 10px;
+        padding: 0 25px;
       }
+
+      .this-side{
+        width: 40px;
+        background-color: blue;
+      }
+
+      .small{
+        font-size: 12px;
+        color: rgb(60, 80, 232);
+        font-weight: bold;
+      }
+
+      .abunchatext{
+        width: 200px;
+        font-size: 15px;
+      }
+
+      .rectangles{
+        margin-top: 8px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .rectangle{
+        width: 100px;
+        height: 35px;
+        background-color: rgb(44, 47, 229);
+        border-radius: 6px;
+      }
+
+      .content{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
     </style>
   </head>
   <body>
@@ -450,108 +527,113 @@
         </div>
       </div>
       <li class="middle-section">
-        <ul class="options-container">
-          <div class="options">
-            <div class="nav-icon home"></div>
+        <ul class="tabs-container"></ul>
+          <div class="tabs">
+            <div class="tab-icon home"></div>
             <div class="underline"></div>
             <div class="tooltip">Home</div>
           </div>
         </ul>
-        <ul class="options-container">
-          <div class="options">
-            <div class="nav-icon"></div>
-            <div class="nav-hover-bg"></div>
+        <ul class="tabs-container">
+          <div class="tabs">
+            <div class="tab-icon"></div>
+            <div class="tab-hover-bg"></div>
             <div class="tooltip">Friends</div>
           </div>
         </ul>
-        <ul class="options-container">
-          <div class="options">
-            <div class="nav-icon"></div>
-            <div class="nav-hover-bg"></div>
+        <ul class="tabs-container">
+          <div class="tabs">
+            <div class="tab-icon"></div>
+            <div class="tab-hover-bg"></div>
             <div class="tooltip">Videos</div>
           </div>
         </ul>
-        <ul class="options-container">
-          <div class="options">
-            <div class="nav-icon"></div>
-            <div class="nav-hover-bg"></div>
+        <ul class="tabs-container">
+          <div class="tabs">
+            <div class="tab-icon"></div>
+            <div class="tab-hover-bg"></div>
             <div class="tooltip">Groups</div>
           </div>
         </ul>
-        <ul class="options-container">
-          <div class="options">
-            <div class="nav-icon"></div>
-            <div class="nav-hover-bg"></div>
+        <ul class="tabs-container">
+          <div class="tabs">
+            <div class="tab-icon"></div>
+            <div class="tab-hover-bg"></div>
             <div class="tooltip">Games</div>
           </div>
         </ul>
       </li>
       <div class="right-section">
-        <div class="options-2-container menu">
-          <div class="options-2" tabindex="-1">
+        <div class="options-container menu">
+          <div class="options" tabindex="-1">
             <div class="action-icon"></div>
             <div class="overlay"></div>
             <div class="tooltip">Menu</div>
-            <div class="expand menu-details"></div>
+            <div class="options-expansion menu-details"></div>
           </div>
         </div>
-        <div class="options-2-container messenger">
-          <div class="options-2" tabindex="-1">
+        <div class="options-container messenger">
+          <div class="options" tabindex="-1">
             <div class="action-icon"></div>
             <div class="overlay"></div>
             <div class="tooltip">Messenger</div>
             <div class="notif">1</div>
-            <div class="expand messenger-details"></div>
+            <div class="options-expansion messenger-details"></div>
           </div>
         </div>
-        <div class="options-2-container notifications">
-          <div class="options-2" tabindex="-1">
+        <div class="options-container notifications"> <!-- remove additional classes from options-container as it is useless, and use its name for options-expansion -->
+          <div class="options" tabindex="-1">
             <div class="action-icon"></div>
             <div class="overlay"></div>
             <div class="tooltip">Notifications</div>
-            <div class="expand notification-details">
-              <div class="header">
-                <div class="first-row">
+            <div class="options-expansion notification-details">
+              <div class="head">
+                <div class="row-1">
                   <div class="notification-title">Notifications</div>
                   <div class="triple-dot">&#183;&#183;&#183;</div>
                 </div>
-                <div class="second-row">
+                <div class="row-2">
                   <div class="all-button">All</div>
                   <div class="unread-button">Unread</div>
                 </div>
               </div>
-              <div class="body">
-                <div class="header-2">
-                  <div class="new-title"></div>
-                  <div class="seeall"></div>
+              <div class="body"> <!-- this whole thing has weird names, change it later. they are at the bottom of css styles sheet. maybe its time to divide the style sheet?-->
+                <div class ="title"> <!-- Maybe rename it later-->
+                  <span class="sub-title">Friend requests</span>
+                  <span class="see-all">See all</span>
                 </div>
-                <div class="notified">
-                  <div class="notif-pic">
-                    <div class="notif-profile-pic"></div>
-                    <div class="notif-like-icon"></div>
-                  </div>
+                <div class="alert-container">
+                  <div class="this-side"></div>
                   <div class="content">
-                    <div><span class="bold">Name</span> likes a post you are tagged in</div>
+                    <div class="abunchatext">
+                      <strong>John Doe</strong> sent you a friend request.<br>
+                      <span class="small">2m</span>
+                    </div>
+                    <div class="rectangles">
+                        <div class="rectangle"></div>
+                        <div class="rectangle"></div>
+                      </div>
                   </div>
-                  <div class="notif-unread-box">
-                    <div class="notif-unread-dot"></div>
-                  </div>
+                </div>
+                <div class ="title"> <!-- Maybe rename it later-->
+                  <span class="sub-title">Earlier</span>
+                  <span class="see-all">See all</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="options-2-container">
-          <div class="options-2" tabindex="-1">
+        <div class="options-container">
+          <div class="options" tabindex="-1">
             <div class="user-profile"></div>
             <div class="overlay"></div>
             <div class="tooltip">Account</div>
             <div class="dropdown"></div>
-            <div class="expand profile-details">
+            <div class="options-expansion profile-details">
               <div class="profile-container">
                 <div class="profile">
                   <div class="profile-picture"></div>
-                  <div class="username">Marvelous</div>
+                  <div class="username">Marvelous</div> <!-- replace with subtitle later-->
                 </div>
                 <div class="center">
                   <div class="line-break"></div>
@@ -608,9 +690,9 @@
                 </div>
               </div>
               <div class="terms">
-                <span class="bold">Privacy &#183; Terms &#183; Advertising &#183;
+                <strong>Privacy &#183; Terms &#183; Advertising &#183;
                    Ad Choices&#9654; &#183; Cookies
-                </span>&#183; More &#183; Meta &#169; 2025
+                </strong>&#183; More &#183; Meta &#169; 2025
               </div>
             </div>
           </div>
