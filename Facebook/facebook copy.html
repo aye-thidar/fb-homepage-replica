@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook</title>
+    <style>
+      /* ===========================
+         RESET & BASE STYLES
+      ============================ */
+      *{
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body{
+        height: 3000px;
+        background-color: rgb(240, 240, 240);
+      }
+      ul, li{
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ===========================
+         HEADER & LAYOUT
+      ============================ */
+      header{
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgb(255, 255, 255);
+      }
+      .left-section{
+        height: 56px;
+        position: absolute;
+        left: 0;
+        align-items: center;
+        display: flex;
+        padding: 0 16px;
+      }
+      .middle-section{
+        display: flex;
+        justify-content: center;
+        padding: 0 110px;
+      }
+      .right-section{
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        right: 0;
+        top: 0;
+        padding: 0 16px 0 4px;
+      }
+
+      /* ===========================
+         LOGO & SEARCH
+      ============================ */
+
+      .facebook-logo{
+        height: 40px;
+        margin-right: 8px;
+      }
+
+      .searchbar-container{
+        position: relative;
+      }
+
+      .search-logo{
+        position: absolute;
+        left: 10px;
+        top: 12px; 
+        height: 18px;
+      }
+
+      .searchbar{
+        border: none;
+        border-radius: 20px;
+        height: 40px;
+        width: 240px;
+        background-color: rgb(241, 241, 241);
+        padding-left: 37px;
+        font-size: 15px;
+        font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+      }
+
+      .searchbar:focus{ /*Done so that there is no outline when the searchbar is active*/
+        outline: 0;
+      }
+
+      /* ===========================
+         NAVIGATION OPTIONS
+      ============================ */
+      .options-container{
+        margin-left: 8px;
+        border-top: inset 2px solid black; /*To prevent the options from being too close to the top*/
+      }
+
+      .options{
+        display: flex;
+        flex-direction: column;
+        width: 76.39px;
+        height: 56px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .nav-icon{ /*The placeholder for the icons*/
+        z-index: 2;
+        height: 24px;
+        width: 24px;
+        background-color: rgb(138, 138, 138);
+      }
+      .underline{ /*The blue underline that appears when the option is active*/
+        position: absolute;
+        height: 3px;
+        width: 72px;
+        bottom: 0;
+        background-color: rgb(37, 105, 231);
+      }
+
+      .home{
+        background-color: rgb(37, 105, 231);
+      }
+
+      .nav-hover-bg{ /*The shadow background that appears when the option is hovered over*/
+        opacity: 0;
+        z-index: 1;
+        position: absolute;
+        width: 76.69px;
+        height: 48px;
+        border-radius: 6px;
+        background-color: rgba(235, 235, 235);
+      }
+      
+      .options:hover .tooltip, .options-2:hover .tooltip{
+        transition: opacity 0.3s ease 0.3s;
+      } 
+      .options:hover .nav-hover-bg, .options:hover .tooltip, .options-2:hover .tooltip{
+        opacity: 1;
+      } 
+      .tooltip{
+        bottom: -40px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        position: absolute;
+        font-size: 13px;
+        color: white;
+        background-color: rgba(0,0,0,0.75);
+        border-radius: 12px;
+        box-shadow: 0 0 4px rgba(0,0,0,0.6);
+        padding: 6px 12px 8px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      /* ===========================
+         RIGHT SECTION ICONS
+      ============================ */
+      .options-2-container{
+        display: flex;
+        height: 56px;
+        width: 40px;
+        align-items: center;
+        justify-content: center;
+      }
+      .options-2{
+        background-color: rgb(223, 223, 223);
+        border-radius: 20px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .action-icon{
+        width: 20px;
+        height: 20px;
+        background-color: black;
+      }
+      .user-profile{
+        background-color: blue;
+        width: 40px;
+        height: 40px;
+        border-radius: 24px;
+      }
+      .notifications, .messenger, .menu{
+        margin-right: 8px;
+      }
+      .dropdown{
+        font-family: Arial;
+        font-size: 12px;
+        height: 11px;
+        width: 11px;
+        background-color: rgb(226, 226, 226);
+        position: absolute;
+        border-radius: 8px;
+        bottom: -1px;
+        right: -1px;
+        border: 2px solid white;
+      }
+      .notif{
+        background-color: rgb(231, 37, 47);
+        color: white;
+        font-weight: bold;
+        font-family: Arial;
+        display: flex;
+        font-size: 12px;
+        position: absolute;
+        top: -6px;
+        right: -5px;
+        border-radius: 10px;
+        padding: 4px 6px 1px;
+      }
+      .overlay{
+        opacity: 0;
+        border-radius: 20px;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .options-2:active .user-profile, .options-2:active .overlay, .options-2:active{
+        width: 39px;
+        height: 39px;
+        opacity: 1;
+      }
+      .options-2:active .notif{ /*Shifts the thing*/
+        top: -7px;
+        right: -5px;
+      }
+      .options-2:active .dropdown{ /*Makes the dropdown shrink when the option is clicked*/ 
+        width: 10px;
+        height: 10px;
+        bottom: 0;
+        right: 0;
+        background-color: rgb(209, 209, 209);
+      }
+      .options-2:active .action-icon{ /*Makes the option shrink when clicked*/ 
+        width: 19px;
+        height: 19px;
+      }
+
+      /* ===========================
+         DROPDOWN PANELS
+      ============================ */
+      .expand{
+        z-index: 2;
+        opacity: 0;
+        position: absolute;
+        pointer-events: none; /* Use Pointer Events to, changing to cursor will activate the dropdowns. changing to none, will disable it*/
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+      }
+      .messenger-details{
+        width: 360px;
+        height: 668.97px;
+        bottom: -673px;
+        right: -92px;
+      }
+      .notification-details{
+        width: 360px;
+        height: 668.97px;
+        bottom: -674px;
+        left: -276px;
+      }
+      .menu-details{
+        width: 559.38px;
+        height: 1850px;
+        bottom: -1854px;
+        right: -140px;
+      }
+      .profile-details{
+        bottom: -489px;
+        left: -324px;
+        display: flex;
+        flex-direction: column;
+      }
+      .options-2:focus .expand{
+        opacity: 1;
+        transition: opacity 0.3s;
+      }
+
+      /* ===========================
+         PROFILE & SETTINGS
+      ============================ */
+      .profile-container{
+        margin: 16px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        box-shadow: 0 1px 9px rgba(0, 0, 0, 0.2);
+      }
+      .profile-picture{
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+        background-color: blue;
+        z-index: 1;
+      }
+      .profile{
+        align-items: center;
+        display: flex;
+        padding: 12px 7px 10px;
+        border-radius: 10px;
+        margin: 4px;
+        position: relative;
+      }
+      .username{
+        font-weight: 600;
+        margin-left: 8px;
+        font-size: 17px;
+      }
+      .center{
+        justify-content: center;
+        display: flex;
+      }
+      .line-break{
+        height: 1px;
+        width: 307px;
+        background-color: rgb(190, 190, 190);
+        display: flex;
+      }
+      .all-profiles{
+        display: flex;
+        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 10px;
+        margin: 12px;
+        background-color: rgb(223, 223, 223);
+      }
+      .profile-icon{
+        height: 10px;
+        width: 10px;
+        background-color: black;
+      }
+      .settings{
+        display: flex;
+        flex-direction: column;
+      }
+      .setting-options{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 7px 14px;
+        border-radius: 8px;
+      }
+      .next{
+        font-size: 30px;
+        color: grey;
+      }
+      .setting-picture{
+        background-color: rgb(216, 216, 216);
+        width: 35px;
+        height: 35px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .setting-icon{
+        height: 12px;
+        width: 12px;
+        background-color: black;
+      }
+      .name-wrap{
+        flex: 1;
+        margin-left: 10px;
+      }
+      .setting-name{
+        font-weight: 600;
+        font-size: 15px;
+      }
+      .smaller{
+        font-size: 14.5px;
+      }
+      .button{
+        font-size: 13px;
+      }
+
+      /* ===========================
+         NOTIFICATIONS DROPDOWN
+      ============================ */
+      .header{
+        display: flex;
+        flex-direction: column;
+      }
+      .first-row{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+      }
+      .notification-title{
+        font-weight: bold;
+        font-size: 24px;
+      }
+      .triple-dot{
+        font-size: 22px;
+        font-weight: bold;
+        color: grey;
+      }
+      .second-row{
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+      }
+      .all-button{
+        font-weight: 550;
+        padding: 6px 12px;
+        font-size: 15px;
+        border-radius: 18px;
+        margin-right: 17px;
+        color: rgb(0, 110, 255);
+        background-color: rgb(227, 240, 236);
+      }
+      .unread-button{
+        font-weight: 550;
+        font-size: 15px;
+      }
+
+      /* ===========================
+         MISCELLANEOUS
+      ============================ */
+      .text{
+        margin-left: 6px;
+        font-weight: 600;
+        font-size: 15px;
+      }    
+      .terms{
+        padding: 15px 16px;
+        color: grey;
+        font-size: 13px;
+      }
+      .bold{
+        font-weight: 550;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="left-section">
+        <img class="facebook-logo" src="Icons/facebook-logo.webp">
+        <div class="searchbar-container">
+          <input class="searchbar" type="search" placeholder="Search Facebook">
+          <img class="search-logo" src="Icons/search-icon.png">
+        </div>
+      </div>
+      <li class="middle-section">
+        <ul class="options-container">
+          <div class="options">
+            <div class="nav-icon home"></div>
+            <div class="underline"></div>
+            <div class="tooltip">Home</div>
+          </div>
+        </ul>
+        <ul class="options-container">
+          <div class="options">
+            <div class="nav-icon"></div>
+            <div class="nav-hover-bg"></div>
+            <div class="tooltip">Friends</div>
+          </div>
+        </ul>
+        <ul class="options-container">
+          <div class="options">
+            <div class="nav-icon"></div>
+            <div class="nav-hover-bg"></div>
+            <div class="tooltip">Videos</div>
+          </div>
+        </ul>
+        <ul class="options-container">
+          <div class="options">
+            <div class="nav-icon"></div>
+            <div class="nav-hover-bg"></div>
+            <div class="tooltip">Groups</div>
+          </div>
+        </ul>
+        <ul class="options-container">
+          <div class="options">
+            <div class="nav-icon"></div>
+            <div class="nav-hover-bg"></div>
+            <div class="tooltip">Games</div>
+          </div>
+        </ul>
+      </li>
+      <div class="right-section">
+        <div class="options-2-container menu">
+          <div class="options-2" tabindex="-1">
+            <div class="action-icon"></div>
+            <div class="overlay"></div>
+            <div class="tooltip">Menu</div>
+            <div class="expand menu-details"></div>
+          </div>
+        </div>
+        <div class="options-2-container messenger">
+          <div class="options-2" tabindex="-1">
+            <div class="action-icon"></div>
+            <div class="overlay"></div>
+            <div class="tooltip">Messenger</div>
+            <div class="notif">1</div>
+            <div class="expand messenger-details"></div>
+          </div>
+        </div>
+        <div class="options-2-container notifications">
+          <div class="options-2" tabindex="-1">
+            <div class="action-icon"></div>
+            <div class="overlay"></div>
+            <div class="tooltip">Notifications</div>
+            <div class="expand notification-details">
+              <div class="header">
+                <div class="first-row">
+                  <div class="notification-title">Notifications</div>
+                  <div class="triple-dot">&#183;&#183;&#183;</div>
+                </div>
+                <div class="second-row">
+                  <div class="all-button">All</div>
+                  <div class="unread-button">Unread</div>
+                </div>
+              </div>
+              <div class="body">
+                <div class="header-2">
+                  <div class="new-title"></div>
+                  <div class="seeall"></div>
+                </div>
+                <div class="notified">
+                  <div class="notif-pic">
+                    <div class="notif-profile-pic"></div>
+                    <div class="notif-like-icon"></div>
+                  </div>
+                  <div class="content">
+                    <div><span class="bold">Name</span> likes a post you are tagged in</div>
+                  </div>
+                  <div class="notif-unread-box">
+                    <div class="notif-unread-dot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="options-2-container">
+          <div class="options-2" tabindex="-1">
+            <div class="user-profile"></div>
+            <div class="overlay"></div>
+            <div class="tooltip">Account</div>
+            <div class="dropdown"></div>
+            <div class="expand profile-details">
+              <div class="profile-container">
+                <div class="profile">
+                  <div class="profile-picture"></div>
+                  <div class="username">Marvelous</div>
+                </div>
+                <div class="center">
+                  <div class="line-break"></div>
+                </div>
+                <div class="all-profiles">
+                  <div class="profile-icon"></div>
+                  <div class="text">See all profiles</div>
+                </div>
+              </div>
+              <div class="settings">
+                <div class="setting-options">
+                  <div class="setting-picture">
+                    <div class="setting-icon"></div>
+                  </div>
+                  <div class="name-wrap">
+                    <div class="setting-name">Settings & Privacy</div>
+                  </div>
+                  <div class="next">&#10148;</div>
+                </div>
+                <div class="setting-options">
+                  <div class="setting-picture">
+                    <div class="setting-icon"></div>
+                  </div>
+                  <div class="name-wrap">
+                    <div class="setting-name">Help & Support</div>
+                  </div>
+                  <div class="next">&#10148;</div>
+                </div>
+                <div class="setting-options">
+                  <div class="setting-picture">
+                    <div class="setting-icon"></div>
+                  </div>
+                  <div class="name-wrap">
+                    <div class="setting-name">Display & acessibility</div>
+                  </div>
+                  <div class="next">&#10148;</div>
+                </div>
+                <div class="setting-options">
+                  <div class="setting-picture">
+                    <div class="setting-icon"></div>
+                  </div>
+                  <div class="name-wrap">
+                    <div class="setting-name smaller">Give Feedback</div>
+                    <div class="button">CTRL B</div>
+                  </div>
+                </div>
+                <div class="setting-options">
+                  <div class="setting-picture">
+                    <div class="setting-icon"></div>
+                  </div>
+                  <div class="name-wrap">
+                    <div class="setting-name">Log Out</div>
+                  </div>
+                </div>
+              </div>
+              <div class="terms">
+                <span class="bold">Privacy &#183; Terms &#183; Advertising &#183;
+                   Ad Choices&#9654; &#183; Cookies
+                </span>&#183; More &#183; Meta &#169; 2025
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </body>
+</html>
