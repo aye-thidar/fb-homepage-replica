@@ -264,10 +264,12 @@
         right: -92px;
       }
       .notification-details{
-        width: 360px;
-        height: 668.97px;
-        bottom: -674px;
+        padding : 12px 16px;
+        bottom: -622px;
         left: -276px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         opacity: 1; /*so that it doesnt disappear*/
       }
       .menu-details{
@@ -392,13 +394,13 @@
       .head{
         display: flex;
         flex-direction: column;
+        gap: 5px;
       }
 
       .row-1{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 15px;
       }
       .notification-title{
         font-weight: bold;
@@ -412,7 +414,6 @@
       .row-2{
         display: flex;
         align-items: center;
-        padding: 0 15px;
       }
       .all-button{
         font-weight: 550;
@@ -434,7 +435,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 15px;
         font-size: 15px;
       }
 
@@ -459,6 +459,89 @@
         font-size: 15px;
       }
 
+      .friend-request-container{
+        display: flex;
+        vertical-align: top;
+        gap: 9px;
+      }
+
+      .friend-request-avatar{
+        width: 55px;
+        height: 55px;
+        border-radius: 27.5px;
+        background-color: rgb(188, 186, 186);
+        position: relative;
+      }
+
+      .friend-request-time{
+        font-size: 12px;
+        color: rgb(60, 80, 232);
+        font-weight: bold;
+      }
+
+      .friend-request-text{
+        width: 215px;
+        font-size: 15px;
+      }
+
+      .friend-request-actions{
+        margin-top: 8px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .confirm-button{
+        padding: 7px 22px;
+        background-color: rgb(51, 91, 236);
+        border-radius: 7px;
+        color: white;
+        font-weight: 550;
+      }
+
+      .friend-request-content{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .friend-request-placeholder{
+        height: 50px;
+      }
+
+      .delete-button{
+        padding: 7px 27px;
+        background-color: rgb(228, 228, 228);
+        border-radius: 7px;
+        color: black;
+        font-weight: 550;
+      }
+
+      .friend-request-status-container{
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 40px;
+      }
+
+      .friend-request-status-dot{
+        width: 12px;
+        height: 12px;
+        border-radius: 6px;
+        position: absolute;
+        right: 0;
+        background-color: rgb(46, 96, 214);
+      }
+
+      .friend-request-avatar-status{
+        width: 24px;
+        height: 24px;
+        border-radius: 12px;
+        position: absolute;
+        bottom: -1px;
+        right: -1px;
+        background: linear-gradient(to bottom, rgb(88, 143, 255), rgba(21, 60, 255));
+      }
+
       /* ===========================
          MISCELLANEOUS
       ============================ */
@@ -473,52 +556,30 @@
         font-size: 13px;
       }
 
-      .alert-container{
-        display: flex;
-        vertical-align: top;
-        gap: 10px;
-        padding: 0 25px;
-      }
-
-      .this-side{
-        width: 40px;
-        background-color: blue;
-      }
-
-      .small{
-        font-size: 12px;
-        color: rgb(60, 80, 232);
-        font-weight: bold;
-      }
-
-      .abunchatext{
-        width: 200px;
+      .foot{
+        justify-content: center;
+    }
+      .see-previous-notifications{
+        padding: 9px 0;
+        text-align: center;
+        font-weight: 600;
         font-size: 15px;
+        background-color: rgb(219, 219, 219);
+        color: rgb(0, 0, 0);
+        border-radius: 5px;
       }
 
-      .rectangles{
-        margin-top: 8px;
-        display: flex;
-        gap: 10px;
-      }
-
-      .rectangle{
-        width: 100px;
-        height: 35px;
-        background-color: rgb(44, 47, 229);
-        border-radius: 6px;
-      }
-
-      .content{
+      .earlier{
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
+        padding-bottom: 10px;
       }
 
-    </style>
-  </head>
-  <body>
-    <header>
+        </style>
+      </head>
+      <body>
+        <header>
       <div class="left-section">
         <img class="facebook-logo" src="Icons/facebook-logo.webp">
         <div class="searchbar-container">
@@ -529,98 +590,166 @@
       <li class="middle-section">
         <ul class="tabs-container"></ul>
           <div class="tabs">
-            <div class="tab-icon home"></div>
-            <div class="underline"></div>
-            <div class="tooltip">Home</div>
+        <div class="tab-icon home"></div>
+        <div class="underline"></div>
+        <div class="tooltip">Home</div>
           </div>
         </ul>
         <ul class="tabs-container">
           <div class="tabs">
-            <div class="tab-icon"></div>
-            <div class="tab-hover-bg"></div>
-            <div class="tooltip">Friends</div>
+        <div class="tab-icon"></div>
+        <div class="tab-hover-bg"></div>
+        <div class="tooltip">Friends</div>
           </div>
         </ul>
         <ul class="tabs-container">
           <div class="tabs">
-            <div class="tab-icon"></div>
-            <div class="tab-hover-bg"></div>
-            <div class="tooltip">Videos</div>
+        <div class="tab-icon"></div>
+        <div class="tab-hover-bg"></div>
+        <div class="tooltip">Videos</div>
           </div>
         </ul>
         <ul class="tabs-container">
           <div class="tabs">
-            <div class="tab-icon"></div>
-            <div class="tab-hover-bg"></div>
-            <div class="tooltip">Groups</div>
+        <div class="tab-icon"></div>
+        <div class="tab-hover-bg"></div>
+        <div class="tooltip">Groups</div>
           </div>
         </ul>
         <ul class="tabs-container">
           <div class="tabs">
-            <div class="tab-icon"></div>
-            <div class="tab-hover-bg"></div>
-            <div class="tooltip">Games</div>
+        <div class="tab-icon"></div>
+        <div class="tab-hover-bg"></div>
+        <div class="tooltip">Games</div>
           </div>
         </ul>
       </li>
       <div class="right-section">
         <div class="options-container menu">
           <div class="options" tabindex="-1">
-            <div class="action-icon"></div>
-            <div class="overlay"></div>
-            <div class="tooltip">Menu</div>
-            <div class="options-expansion menu-details"></div>
+        <div class="action-icon"></div>
+        <div class="overlay"></div>
+        <div class="tooltip">Menu</div>
+        <div class="options-expansion menu-details"></div>
           </div>
         </div>
         <div class="options-container messenger">
           <div class="options" tabindex="-1">
-            <div class="action-icon"></div>
-            <div class="overlay"></div>
-            <div class="tooltip">Messenger</div>
-            <div class="notif">1</div>
-            <div class="options-expansion messenger-details"></div>
+        <div class="action-icon"></div>
+        <div class="overlay"></div>
+        <div class="tooltip">Messenger</div>
+        <div class="notif">1</div>
+        <div class="options-expansion messenger-details"></div>
           </div>
         </div>
-        <div class="options-container notifications"> <!-- remove additional classes from options-container as it is useless, and use its name for options-expansion -->
+        <div class="options-container notifications">
           <div class="options" tabindex="-1">
             <div class="action-icon"></div>
             <div class="overlay"></div>
             <div class="tooltip">Notifications</div>
             <div class="options-expansion notification-details">
-              <div class="head">
-                <div class="row-1">
-                  <div class="notification-title">Notifications</div>
-                  <div class="triple-dot">&#183;&#183;&#183;</div>
-                </div>
-                <div class="row-2">
-                  <div class="all-button">All</div>
-                  <div class="unread-button">Unread</div>
-                </div>
+            <div class="head">
+              <div class="row-1">
+                <div class="notification-title">Notifications</div>
+                <div class="triple-dot">&#183;&#183;&#183;</div>
               </div>
-              <div class="body"> <!-- this whole thing has weird names, change it later. they are at the bottom of css styles sheet. maybe its time to divide the style sheet?-->
-                <div class ="title"> <!-- Maybe rename it later-->
-                  <span class="sub-title">Friend requests</span>
-                  <span class="see-all">See all</span>
-                </div>
-                <div class="alert-container">
-                  <div class="this-side"></div>
-                  <div class="content">
-                    <div class="abunchatext">
-                      <strong>John Doe</strong> sent you a friend request.<br>
-                      <span class="small">2m</span>
-                    </div>
-                    <div class="rectangles">
-                        <div class="rectangle"></div>
-                        <div class="rectangle"></div>
-                      </div>
-                  </div>
-                </div>
-                <div class ="title"> <!-- Maybe rename it later-->
-                  <span class="sub-title">Earlier</span>
-                  <span class="see-all">See all</span>
-                </div>
+              <div class="row-2">
+                <div class="all-button">All</div>
+                <div class="unread-button">Unread</div>
               </div>
             </div>
+            <div class="body">
+              <div class="earlier">
+                <div class ="title">
+                  <span class="sub-title">Friend requests</span>
+                  <span class="see-all">See all</span>
+               </div>
+                <div class="friend-request-container">
+                <div class="friend-request-avatar">
+                  <div class="friend-request-avatar-status"></div>
+                </div>
+                <div class="friend-request-content">
+                  <div class="friend-request-text">
+                    <strong>John Doe</strong> sent you a friend request.<br>
+                    <span class="friend-request-time">2m</span>
+                  </div>
+                  <div class="friend-request-actions">
+                    <div class="confirm-button">Confirm</div>
+                    <div class="delete-button">Delete</div>
+                  </div>
+                </div>
+                <div class="friend-request-status-container">
+                  <div class="friend-request-status-dot"></div>
+                </div>
+              </div>
+              </div>
+              <div class="earlier">
+                <div class ="title">
+                  <span class="sub-title">Earlier</span>
+                  <span class="see-all">See all</span>
+               </div>
+                <div class="friend-request-container">
+                <div class="friend-request-avatar">
+                  <div class="friend-request-avatar-status"></div>
+                </div>
+                <div class="friend-request-content">
+                  <div class="friend-request-text">
+                    <strong>Jane Doe</strong> likes a post you are tagged in.<br>
+                    <span class="friend-request-time">10m</span>
+                  </div>
+                </div>
+                <div class="friend-request-status-container">
+                  <div class="friend-request-status-dot"></div>
+                </div>
+              </div>
+              <div class="friend-request-container">
+                <div class="friend-request-avatar">
+                  <div class="friend-request-avatar-status"></div>
+                </div>
+                <div class="friend-request-content">
+                  <div class="friend-request-text">
+                    <strong>Jane Doe</strong> likes a post you are tagged in.<br>
+                    <span class="friend-request-time">10m</span>
+                  </div>
+                </div>
+                <div class="friend-request-status-container">
+                  <div class="friend-request-status-dot"></div>
+                </div>
+              </div>
+              <div class="friend-request-container">
+                <div class="friend-request-avatar">
+                  <div class="friend-request-avatar-status"></div>
+                </div>
+                <div class="friend-request-content">
+                  <div class="friend-request-text">
+                    <strong>Jane Doe</strong> likes a post you are tagged in.<br>
+                    <span class="friend-request-time">10m</span>
+                  </div>
+                </div>
+                <div class="friend-request-status-container">
+                  <div class="friend-request-status-dot"></div>
+                </div>
+              </div>
+              <div class="friend-request-container">
+                <div class="friend-request-avatar">
+                  <div class="friend-request-avatar-status"></div>
+                </div>
+                <div class="friend-request-content">
+                  <div class="friend-request-text">
+                    <strong>Jane Doe</strong> likes a post you are tagged in.<br>
+                    <span class="friend-request-time">10m</span>
+                  </div>
+                </div>
+                <div class="friend-request-status-container">
+                  <div class="friend-request-status-dot"></div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="foot">
+              <div class="see-previous-notifications">See previous notifications</div>
+            </div>
+          </div>
           </div>
         </div>
         <div class="options-container">
