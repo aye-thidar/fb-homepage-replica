@@ -270,7 +270,6 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        opacity: 1; /*so that it doesnt disappear*/
       }
       .menu-details{
         width: 559.38px;
@@ -391,6 +390,35 @@
       /* ===========================
          NOTIFICATIONS DROPDOWN
       ============================ */
+
+      /*Styling*/
+
+      .section{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-bottom: 10px;
+      }
+
+      .blue-gradient{
+        background: linear-gradient(to bottom, rgb(88, 143, 255), rgba(21, 60, 255));
+      }
+
+      .green-gradient{
+        background: linear-gradient(to bottom, #67DC85, #23BA48);
+      }
+
+      .red-gradient{
+        background: linear-gradient(to bottom, rgb(255, 88, 143), rgba(255, 21, 60));
+      }
+
+      .read{
+        color: grey;
+        font-weight: 500;
+      }
+
+      /*Head*/
+
       .head{
         display: flex;
         flex-direction: column;
@@ -411,10 +439,12 @@
         font-weight: bold;
         color: grey;
       }
+
       .row-2{
         display: flex;
         align-items: center;
       }
+      
       .all-button{
         font-weight: 550;
         padding: 6px 12px;
@@ -459,13 +489,13 @@
         font-size: 15px;
       }
 
-      .friend-request-container{
+      .notification-item-container{
         display: flex;
         vertical-align: top;
         gap: 9px;
       }
 
-      .friend-request-avatar{
+      .notification-avatar{
         width: 55px;
         height: 55px;
         border-radius: 27.5px;
@@ -473,13 +503,13 @@
         position: relative;
       }
 
-      .friend-request-time{
+      .notification-time{
         font-size: 12px;
         color: rgb(60, 80, 232);
         font-weight: bold;
       }
 
-      .friend-request-text{
+      .notification-text{
         width: 215px;
         font-size: 15px;
       }
@@ -498,14 +528,10 @@
         font-weight: 550;
       }
 
-      .friend-request-content{
+      .notification-content{
         display: flex;
         flex-direction: column;
         gap: 8px;
-      }
-
-      .friend-request-placeholder{
-        height: 50px;
       }
 
       .delete-button{
@@ -516,14 +542,14 @@
         font-weight: 550;
       }
 
-      .friend-request-status-container{
+      .notification-unread-status-container{
         display: flex;
         align-items: center;
         position: relative;
         width: 40px;
       }
 
-      .friend-request-status-dot{
+      .notification-unread-status-dot{
         width: 12px;
         height: 12px;
         border-radius: 6px;
@@ -532,14 +558,29 @@
         background-color: rgb(46, 96, 214);
       }
 
-      .friend-request-avatar-status{
+      .notification-avatar-status{
         width: 24px;
         height: 24px;
         border-radius: 12px;
         position: absolute;
         bottom: -1px;
         right: -1px;
-        background: linear-gradient(to bottom, rgb(88, 143, 255), rgba(21, 60, 255));
+      }
+
+      /*Foot*/
+
+      .foot{
+        justify-content: center;
+        }
+      
+      .see-previous-notifications{
+        padding: 9px 0;
+        text-align: center;
+        font-weight: 600;
+        font-size: 15px;
+        background-color: rgb(219, 219, 219);
+        color: rgb(0, 0, 0);
+        border-radius: 5px;
       }
 
       /* ===========================
@@ -554,28 +595,7 @@
         padding: 15px 16px;
         color: grey;
         font-size: 13px;
-      }
-
-      .foot{
-        justify-content: center;
-    }
-      .see-previous-notifications{
-        padding: 9px 0;
-        text-align: center;
-        font-weight: 600;
-        font-size: 15px;
-        background-color: rgb(219, 219, 219);
-        color: rgb(0, 0, 0);
-        border-radius: 5px;
-      }
-
-      .earlier{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding-bottom: 10px;
-      }
-
+      }      
         </style>
       </head>
       <body>
@@ -644,111 +664,104 @@
         </div>
         <div class="options-container notifications">
           <div class="options" tabindex="-1">
-            <div class="action-icon"></div>
-            <div class="overlay"></div>
-            <div class="tooltip">Notifications</div>
-            <div class="options-expansion notification-details">
-            <div class="head">
-              <div class="row-1">
-                <div class="notification-title">Notifications</div>
-                <div class="triple-dot">&#183;&#183;&#183;</div>
-              </div>
-              <div class="row-2">
-                <div class="all-button">All</div>
-                <div class="unread-button">Unread</div>
-              </div>
+        <div class="action-icon"></div>
+        <div class="overlay"></div>
+        <div class="tooltip">Notifications</div>
+        <div class="options-expansion notification-details">
+        <div class="head">
+          <div class="row-1">
+            <div class="notification-title">Notifications</div>
+            <div class="triple-dot">&#183;&#183;&#183;</div>
+          </div>
+          <div class="row-2">
+            <div class="all-button">All</div>
+            <div class="unread-button">Unread</div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="section">
+            <div class ="title">
+          <span class="sub-title">Friend requests</span>
+          <span class="see-all">See all</span>
+           </div>
+            <div class="notification-item-container">
+            <div class="notification-avatar">
             </div>
-            <div class="body">
-              <div class="earlier">
-                <div class ="title">
-                  <span class="sub-title">Friend requests</span>
-                  <span class="see-all">See all</span>
-               </div>
-                <div class="friend-request-container">
-                <div class="friend-request-avatar">
-                  <div class="friend-request-avatar-status"></div>
-                </div>
-                <div class="friend-request-content">
-                  <div class="friend-request-text">
-                    <strong>John Doe</strong> sent you a friend request.<br>
-                    <span class="friend-request-time">2m</span>
-                  </div>
-                  <div class="friend-request-actions">
-                    <div class="confirm-button">Confirm</div>
-                    <div class="delete-button">Delete</div>
-                  </div>
-                </div>
-                <div class="friend-request-status-container">
-                  <div class="friend-request-status-dot"></div>
-                </div>
-              </div>
-              </div>
-              <div class="earlier">
-                <div class ="title">
-                  <span class="sub-title">Earlier</span>
-                  <span class="see-all">See all</span>
-               </div>
-                <div class="friend-request-container">
-                <div class="friend-request-avatar">
-                  <div class="friend-request-avatar-status"></div>
-                </div>
-                <div class="friend-request-content">
-                  <div class="friend-request-text">
-                    <strong>Jane Doe</strong> likes a post you are tagged in.<br>
-                    <span class="friend-request-time">10m</span>
-                  </div>
-                </div>
-                <div class="friend-request-status-container">
-                  <div class="friend-request-status-dot"></div>
-                </div>
-              </div>
-              <div class="friend-request-container">
-                <div class="friend-request-avatar">
-                  <div class="friend-request-avatar-status"></div>
-                </div>
-                <div class="friend-request-content">
-                  <div class="friend-request-text">
-                    <strong>Jane Doe</strong> likes a post you are tagged in.<br>
-                    <span class="friend-request-time">10m</span>
-                  </div>
-                </div>
-                <div class="friend-request-status-container">
-                  <div class="friend-request-status-dot"></div>
-                </div>
-              </div>
-              <div class="friend-request-container">
-                <div class="friend-request-avatar">
-                  <div class="friend-request-avatar-status"></div>
-                </div>
-                <div class="friend-request-content">
-                  <div class="friend-request-text">
-                    <strong>Jane Doe</strong> likes a post you are tagged in.<br>
-                    <span class="friend-request-time">10m</span>
-                  </div>
-                </div>
-                <div class="friend-request-status-container">
-                  <div class="friend-request-status-dot"></div>
-                </div>
-              </div>
-              <div class="friend-request-container">
-                <div class="friend-request-avatar">
-                  <div class="friend-request-avatar-status"></div>
-                </div>
-                <div class="friend-request-content">
-                  <div class="friend-request-text">
-                    <strong>Jane Doe</strong> likes a post you are tagged in.<br>
-                    <span class="friend-request-time">10m</span>
-                  </div>
-                </div>
-                <div class="friend-request-status-container">
-                  <div class="friend-request-status-dot"></div>
-                </div>
-              </div>
-              </div>
+            <div class="notification-content">
+          <div class="notification-text">
+            <strong>John Doe</strong> sent you a friend request.<br>
+            <span class="notification-time">2m</span>
+          </div>
+          <div class="friend-request-actions">
+            <div class="confirm-button">Confirm</div>
+            <div class="delete-button">Delete</div>
+          </div>
             </div>
-            <div class="foot">
-              <div class="see-previous-notifications">See previous notifications</div>
+            <div class="notification-unread-status-container">
+          <div class="notification-unread-status-dot"></div>
             </div>
+          </div>
+          </div>
+          <div class="section">
+            <div class ="title">
+          <span class="sub-title">Earlier</span>
+          <span class="see-all">See all</span>
+           </div>
+            <div class="notification-item-container">
+            <div class="notification-avatar">
+          <div class="notification-avatar-status green-gradient"></div>
+            </div>
+            <div class="notification-content">
+          <div class="notification-text">
+            <strong>John Doe</strong> tagged you in a post, review it.<br>
+            <span class="notification-time">10m</span>
+          </div>
+            </div>
+            <div class="notification-unread-status-container">
+          <div class="notification-unread-status-dot"></div>
+            </div>
+          </div>
+          <div class="notification-item-container">
+            <div class="notification-avatar">
+          <div class="notification-avatar-status red-gradient"></div>
+            </div>
+            <div class="notification-content">
+          <div class="notification-text read">
+            <strong>Jake Doe</strong> reacted to your comment.<br>
+            <span class="notification-time read">2d &#183; 1 reaction &#183; 1 reply</span>
+          </div>
+            </div>
+          </div>
+          <div class="notification-item-container">
+            <div class="notification-avatar">
+          <div class="notification-avatar-status blue-gradient"></div>
+            </div>
+            <div class="notification-content">
+          <div class="notification-text">
+            <strong>Jane Doe</strong> likes a post you are tagged in.<br>
+            <span class="notification-time">2d</span>
+          </div>
+            </div>
+            <div class="notification-unread-status-container">
+          <div class="notification-unread-status-dot"></div>
+            </div>
+          </div>
+          <div class="notification-item-container">
+            <div class="notification-avatar">
+          <div class="notification-avatar-status green-gradient"></div>
+            </div>
+            <div class="notification-content">
+          <div class="notification-text read">
+            <strong>Josh Doe</strong> and <strong>Jane Doe</strong> commented on your post.<br>
+            <span class="notification-time read">3d</span>
+          </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="foot">
+          <div class="see-previous-notifications">See previous notifications</div>
+        </div>
           </div>
           </div>
         </div>
