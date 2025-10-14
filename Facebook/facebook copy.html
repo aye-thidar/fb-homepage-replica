@@ -178,7 +178,7 @@
         justify-content: center;
         cursor: pointer;
       }
-      .action-icon{
+      .action-icon{ /*The placeholder for the action icons*/
         width: 20px;
         height: 20px;
         background-color: black;
@@ -218,7 +218,7 @@
         border-radius: 10px;
         padding: 4px 6px 1px;
       }
-      .overlay{
+      .overlay{ /*This turns the icons darker when clicked*/
         opacity: 0;
         border-radius: 20px;
         position: absolute;
@@ -277,11 +277,14 @@
         bottom: -1854px;
         right: -140px;
       }
+
       .profile-details{
         bottom: -489px;
         left: -324px;
         display: flex;
         flex-direction: column;
+        padding: 16px;
+        gap: 22px;
       }
 
       .options:focus .options-expansion{
@@ -293,7 +296,6 @@
          PROFILE & SETTINGS
       ============================ */
       .profile-container{
-        margin: 16px;
         display: flex;
         flex-direction: column;
         border-radius: 10px;
@@ -346,12 +348,12 @@
       .settings{
         display: flex;
         flex-direction: column;
+        gap: 14px;
       }
       .setting-options{
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 7px 14px;
         border-radius: 8px;
       }
       .next{
@@ -410,11 +412,6 @@
 
       .red-gradient{
         background: linear-gradient(to bottom, rgb(255, 88, 143), rgba(255, 21, 60));
-      }
-
-      .read{
-        color: grey;
-        font-weight: 500;
       }
 
       /*Head*/
@@ -506,7 +503,7 @@
       .notification-time{
         font-size: 12px;
         color: rgb(60, 80, 232);
-        font-weight: bold;
+        font-weight: 650;
       }
 
       .notification-text{
@@ -567,6 +564,14 @@
         right: -1px;
       }
 
+      .notification-time.read, .notification-text.read{ /*This is so that the read notifications appear greyed out*/
+        color: grey;
+        font-weight: normal;
+      }/*The reason I dont style '.read' alone is because having specificity 
+      like this prevents other elements with the class 'read' from being affected 
+      (I didnt know that by the way). And, the order of the class wont matter anymore.
+      It matters without it because css reads from top to bottom, so whats on top will be overriden by whats under*/
+
       /*Foot*/
 
       .foot{
@@ -592,10 +597,10 @@
         font-size: 15px;
       }    
       .terms{
-        padding: 15px 16px;
         color: grey;
         font-size: 13px;
       }      
+
         </style>
       </head>
       <body>
@@ -765,7 +770,7 @@
           </div>
           </div>
         </div>
-        <div class="options-container">
+        <div class="options-container"> <!-- Theres a lot of things to rename here-->
           <div class="options" tabindex="-1">
             <div class="user-profile"></div>
             <div class="overlay"></div>
@@ -832,9 +837,9 @@
                 </div>
               </div>
               <div class="terms">
-                <strong>Privacy &#183; Terms &#183; Advertising &#183;
+                Privacy &#183; Terms &#183; Advertising &#183;
                    Ad Choices&#9654; &#183; Cookies
-                </strong>&#183; More &#183; Meta &#169; 2025
+                &#183; More &#183; Meta &#169; 2025
               </div>
             </div>
           </div>
